@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ElementViewDlg" widgetVar="ElementViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewElementTitle}">
+            <h:form id="ElementViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{elementController.selected != null}">
+                        <h:outputText value="#{bundle.ViewElementLabel_idElementu}"/>
+                        <h:outputText value="#{elementController.selected.idElementu}" title="#{bundle.ViewElementTitle_idElementu}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_nazwa}"/>
+                        <h:outputText value="#{elementController.selected.nazwa}" title="#{bundle.ViewElementTitle_nazwa}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_nrEwidencyjny}"/>
+                        <h:outputText value="#{elementController.selected.nrEwidencyjny}" title="#{bundle.ViewElementTitle_nrEwidencyjny}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_wartoscEwidencyjna}"/>
+                        <h:outputText value="#{elementController.selected.wartoscEwidencyjna}" title="#{bundle.ViewElementTitle_wartoscEwidencyjna}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_dataZakupu}"/>
+                        <h:outputText value="#{elementController.selected.dataZakupu}" title="#{bundle.ViewElementTitle_dataZakupu}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewElementLabel_uwagi}"/>
+                        <h:outputText value="#{elementController.selected.uwagi}" title="#{bundle.ViewElementTitle_uwagi}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_kategoria}"/>
+                        <h:outputText value="#{elementController.selected.kategoria}" title="#{bundle.ViewElementTitle_kategoria}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_osobaOdpowiedzialna}"/>
+                        <h:outputText value="#{elementController.selected.osobaOdpowiedzialna}" title="#{bundle.ViewElementTitle_osobaOdpowiedzialna}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_sala}"/>
+                        <h:outputText value="#{elementController.selected.sala}" title="#{bundle.ViewElementTitle_sala}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_stan}"/>
+                        <h:outputText value="#{elementController.selected.stan}" title="#{bundle.ViewElementTitle_stan}"/>
+                        <h:outputText value="#{bundle.ViewElementLabel_typ}"/>
+                        <h:outputText value="#{elementController.selected.typ}" title="#{bundle.ViewElementTitle_typ}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ElementViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

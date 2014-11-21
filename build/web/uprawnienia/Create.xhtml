@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UprawnieniaCreateDlg" widgetVar="UprawnieniaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUprawnieniaTitle}">
+            <h:form id="UprawnieniaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{uprawnieniaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUprawnieniaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{uprawnieniaController.selected.id}" title="#{bundle.CreateUprawnieniaTitle_id}" required="true" requiredMessage="#{bundle.CreateUprawnieniaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateUprawnieniaLabel_rola}" for="rola" />
+                        <p:inputText id="rola" value="#{uprawnieniaController.selected.rola}" title="#{bundle.CreateUprawnieniaTitle_rola}" required="true" requiredMessage="#{bundle.CreateUprawnieniaRequiredMessage_rola}"/>
+                        <p:outputLabel value="#{bundle.CreateUprawnieniaLabel_uzytkownik}" for="uzytkownik" />
+                        <p:selectOneMenu id="uzytkownik" value="#{uprawnieniaController.selected.uzytkownik}" >
+                            <f:selectItems value="#{pracownikController.itemsAvailableSelectOne}"
+                                           var="uzytkownikItem"
+                                           itemValue="#{uzytkownikItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{uprawnieniaController.create}" value="#{bundle.Save}" update="display,:UprawnieniaListForm:datalist,:growl" oncomplete="handleSubmit(args,'UprawnieniaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UprawnieniaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

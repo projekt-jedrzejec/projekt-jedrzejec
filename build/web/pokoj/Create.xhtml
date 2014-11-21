@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PokojCreateDlg" widgetVar="PokojCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePokojTitle}">
+            <h:form id="PokojCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pokojController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePokojLabel_idPokoju}" for="idPokoju" />
+                        <p:inputText id="idPokoju" value="#{pokojController.selected.idPokoju}" title="#{bundle.CreatePokojTitle_idPokoju}" required="true" requiredMessage="#{bundle.CreatePokojRequiredMessage_idPokoju}"/>
+                        <p:outputLabel value="#{bundle.CreatePokojLabel_pokoj}" for="pokoj" />
+                        <p:inputText id="pokoj" value="#{pokojController.selected.pokoj}" title="#{bundle.CreatePokojTitle_pokoj}" required="true" requiredMessage="#{bundle.CreatePokojRequiredMessage_pokoj}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pokojController.create}" value="#{bundle.Save}" update="display,:PokojListForm:datalist,:growl" oncomplete="handleSubmit(args,'PokojCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PokojCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

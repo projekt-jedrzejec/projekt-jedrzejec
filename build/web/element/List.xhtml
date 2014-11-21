@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListElementTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ElementListForm">
+                <p:panel header="#{bundle.ListElementTitle}">
+                    <p:dataTable id="datalist" value="#{elementController.items}" var="item"
+                                 selectionMode="single" selection="#{elementController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idElementu}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_idElementu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idElementu}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_nazwa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nazwa}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_nrEwidencyjny}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nrEwidencyjny}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_wartoscEwidencyjna}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.wartoscEwidencyjna}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_dataZakupu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataZakupu}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_uwagi}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.uwagi}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_kategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kategoria}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_osobaOdpowiedzialna}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.osobaOdpowiedzialna}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_sala}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sala}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_stan}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.stan}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_typ}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.typ}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{elementController.prepareCreate}" update=":ElementCreateForm" oncomplete="PF('ElementCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ElementViewForm" oncomplete="PF('ElementViewDialog').show()" disabled="#{empty elementController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ElementEditForm" oncomplete="PF('ElementEditDialog').show()" disabled="#{empty elementController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{elementController.destroy}" update=":growl,datalist" disabled="#{empty elementController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

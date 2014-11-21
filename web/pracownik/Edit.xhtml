@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PracownikEditDlg" widgetVar="PracownikEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPracownikTitle}">
+            <h:form id="PracownikEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pracownikController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_idPracownika}" for="idPracownika" />
+                        <p:inputText id="idPracownika" value="#{pracownikController.selected.idPracownika}" title="#{bundle.EditPracownikTitle_idPracownika}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_idPracownika}"/>
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_imie}" for="imie" />
+                        <p:inputText id="imie" value="#{pracownikController.selected.imie}" title="#{bundle.EditPracownikTitle_imie}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_imie}"/>
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_nazwisko}" for="nazwisko" />
+                        <p:inputText id="nazwisko" value="#{pracownikController.selected.nazwisko}" title="#{bundle.EditPracownikTitle_nazwisko}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_nazwisko}"/>
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_nrTelefonu}" for="nrTelefonu" />
+                        <p:inputText id="nrTelefonu" value="#{pracownikController.selected.nrTelefonu}" title="#{bundle.EditPracownikTitle_nrTelefonu}" />
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{pracownikController.selected.email}" title="#{bundle.EditPracownikTitle_email}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_email}"/>
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_login}" for="login" />
+                        <p:inputText id="login" value="#{pracownikController.selected.login}" title="#{bundle.EditPracownikTitle_login}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_login}"/>
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{pracownikController.selected.password}" title="#{bundle.EditPracownikTitle_password}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_password}"/>
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_pokoj}" for="pokoj" />
+                        <p:selectOneMenu id="pokoj" value="#{pracownikController.selected.pokoj}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pokojController.itemsAvailableSelectOne}"
+                                           var="pokojItem"
+                                           itemValue="#{pokojItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPracownikLabel_stanowisko}" for="stanowisko" />
+                        <p:selectOneMenu id="stanowisko" value="#{pracownikController.selected.stanowisko}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_stanowisko}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{stanowiskoController.itemsAvailableSelectOne}"
+                                           var="stanowiskoItem"
+                                           itemValue="#{stanowiskoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pracownikController.update}" value="#{bundle.Save}" update="display,:PracownikListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PracownikEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PracownikEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
