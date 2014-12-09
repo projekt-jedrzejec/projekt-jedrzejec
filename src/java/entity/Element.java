@@ -11,8 +11,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -41,10 +40,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Element.findByDataZakupu", query = "SELECT e FROM Element e WHERE e.dataZakupu = :dataZakupu"),
     @NamedQuery(name = "Element.findByUwagi", query = "SELECT e FROM Element e WHERE e.uwagi = :uwagi")})
 public class Element implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_elementu")
     private Integer idElementu;
     @Size(max = 80)
@@ -65,19 +65,19 @@ public class Element implements Serializable {
     @Column(name = "uwagi")
     private String uwagi;
     @JoinColumn(name = "kategoria", referencedColumnName = "id_kategorii")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Kategoria kategoria;
     @JoinColumn(name = "osoba_odpowiedzialna", referencedColumnName = "id_pracownika")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Pracownik osobaOdpowiedzialna;
     @JoinColumn(name = "sala", referencedColumnName = "id_sali")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Sala sala;
     @JoinColumn(name = "stan", referencedColumnName = "id_stanu")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Stan stan;
     @JoinColumn(name = "typ", referencedColumnName = "id_typu")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Typ typ;
 
     public Element() {
@@ -202,7 +202,7 @@ public class Element implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Element[ idElementu=" + idElementu + " ]";
+        return nrEwidencyjny;
     }
-    
+
 }

@@ -9,6 +9,7 @@ import entity.Pracownik;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -16,7 +17,8 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PracownikFacade extends AbstractFacade<Pracownik> {
-    @PersistenceContext(unitName = "testPU")
+
+    @PersistenceContext(unitName = "ZarzadzanieTestPU")
     private EntityManager em;
 
     @Override
@@ -27,5 +29,21 @@ public class PracownikFacade extends AbstractFacade<Pracownik> {
     public PracownikFacade() {
         super(Pracownik.class);
     }
-    
+
+    public Pracownik login(String user, String password) {
+
+        try {
+            Query query = em.createQuery("select p from Pracownik p where p.login = :login and p.password = :pass");
+            query.setParameter("login", user);
+            query.setParameter("pass", password);
+
+            return (Pracownik) query.getSingleResult();
+        } catch (Exception ex) {
+//            JsfUtil.addErrorMessage(ex.getMessage());
+            System.out.println("Error in login() -->" + ex.getMessage());
+            return null;
+        }
+
+    }
+
 }

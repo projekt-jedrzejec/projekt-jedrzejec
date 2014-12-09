@@ -11,8 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,10 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Kategoria.findByIdKategorii", query = "SELECT k FROM Kategoria k WHERE k.idKategorii = :idKategorii"),
     @NamedQuery(name = "Kategoria.findByKategoria", query = "SELECT k FROM Kategoria k WHERE k.kategoria = :kategoria")})
 public class Kategoria implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_kategorii")
     private Integer idKategorii;
     @Basic(optional = false)
@@ -46,7 +46,7 @@ public class Kategoria implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "kategoria")
     private String kategoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kategoria")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kategoria", fetch = FetchType.EAGER)
     private List<Element> elementList;
 
     public Kategoria() {
@@ -108,7 +108,7 @@ public class Kategoria implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Kategoria[ idKategorii=" + idKategorii + " ]";
+        return kategoria;
     }
-    
+
 }

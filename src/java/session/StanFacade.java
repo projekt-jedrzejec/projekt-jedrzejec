@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class StanFacade extends AbstractFacade<Stan> {
-    @PersistenceContext(unitName = "testPU")
+    @PersistenceContext(unitName = "ZarzadzanieTestPU")
     private EntityManager em;
 
     @Override

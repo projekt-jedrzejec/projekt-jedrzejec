@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class KategoriaFacade extends AbstractFacade<Kategoria> {
-    @PersistenceContext(unitName = "testPU")
+    @PersistenceContext(unitName = "ZarzadzanieTestPU")
     private EntityManager em;
 
     @Override

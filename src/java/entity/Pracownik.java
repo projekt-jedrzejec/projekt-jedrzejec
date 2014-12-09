@@ -10,8 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -43,8 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Pracownik implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_pracownika")
     private Integer idPracownika;
     @Basic(optional = false)
@@ -77,14 +76,15 @@ public class Pracownik implements Serializable {
     @Column(name = "password")
     private String password;
     @JoinColumn(name = "pokoj", referencedColumnName = "id_pokoju")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Pokoj pokoj;
+    @JoinColumn(name = "rola", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Rola rola;
     @JoinColumn(name = "stanowisko", referencedColumnName = "id_stanowiska")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Stanowisko stanowisko;
-    @OneToMany(mappedBy = "uzytkownik")
-    private List<Uprawnienia> uprawnieniaList;
-    @OneToMany(mappedBy = "osobaOdpowiedzialna")
+    @OneToMany(mappedBy = "osobaOdpowiedzialna", fetch = FetchType.EAGER)
     private List<Element> elementList;
 
     public Pracownik() {
@@ -167,21 +167,20 @@ public class Pracownik implements Serializable {
         this.pokoj = pokoj;
     }
 
+    public Rola getRola() {
+        return rola;
+    }
+
+    public void setRola(Rola rola) {
+        this.rola = rola;
+    }
+
     public Stanowisko getStanowisko() {
         return stanowisko;
     }
 
     public void setStanowisko(Stanowisko stanowisko) {
         this.stanowisko = stanowisko;
-    }
-
-    @XmlTransient
-    public List<Uprawnienia> getUprawnieniaList() {
-        return uprawnieniaList;
-    }
-
-    public void setUprawnieniaList(List<Uprawnienia> uprawnieniaList) {
-        this.uprawnieniaList = uprawnieniaList;
     }
 
     @XmlTransient
@@ -215,7 +214,7 @@ public class Pracownik implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Pracownik[ idPracownika=" + idPracownika + " ]";
+        return imie + " " + nazwisko;
     }
     
 }

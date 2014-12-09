@@ -11,8 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,10 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Stan.findByIdStanu", query = "SELECT s FROM Stan s WHERE s.idStanu = :idStanu"),
     @NamedQuery(name = "Stan.findByStan", query = "SELECT s FROM Stan s WHERE s.stan = :stan")})
 public class Stan implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_stanu")
     private Integer idStanu;
     @Basic(optional = false)
@@ -46,7 +46,7 @@ public class Stan implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "stan")
     private String stan;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stan")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stan", fetch = FetchType.EAGER)
     private List<Element> elementList;
 
     public Stan() {
@@ -108,7 +108,7 @@ public class Stan implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Stan[ idStanu=" + idStanu + " ]";
+        return stan;
     }
-    
+
 }

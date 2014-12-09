@@ -11,8 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,10 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Typ.findByIdTypu", query = "SELECT t FROM Typ t WHERE t.idTypu = :idTypu"),
     @NamedQuery(name = "Typ.findByTyp", query = "SELECT t FROM Typ t WHERE t.typ = :typ")})
 public class Typ implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_typu")
     private Integer idTypu;
     @Basic(optional = false)
@@ -46,7 +46,7 @@ public class Typ implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "typ")
     private String typ;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typ")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typ", fetch = FetchType.EAGER)
     private List<Element> elementList;
 
     public Typ() {
@@ -108,7 +108,7 @@ public class Typ implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Typ[ idTypu=" + idTypu + " ]";
+        return typ;
     }
-    
+
 }

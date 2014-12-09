@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StanowiskoCreateDlg" widgetVar="StanowiskoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateStanowiskoTitle}">
+            <h:form id="StanowiskoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{stanowiskoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateStanowiskoLabel_idStanowiska}" for="idStanowiska" />
+                        <p:inputText id="idStanowiska" value="#{stanowiskoController.selected.idStanowiska}" title="#{bundle.CreateStanowiskoTitle_idStanowiska}" required="true" requiredMessage="#{bundle.CreateStanowiskoRequiredMessage_idStanowiska}"/>
+                        <p:outputLabel value="#{bundle.CreateStanowiskoLabel_stanowisko}" for="stanowisko" />
+                        <p:inputText id="stanowisko" value="#{stanowiskoController.selected.stanowisko}" title="#{bundle.CreateStanowiskoTitle_stanowisko}" required="true" requiredMessage="#{bundle.CreateStanowiskoRequiredMessage_stanowisko}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{stanowiskoController.create}" value="#{bundle.Save}" update="display,:StanowiskoListForm:datalist,:growl" oncomplete="handleSubmit(args,'StanowiskoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true" onclick="StanowiskoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
