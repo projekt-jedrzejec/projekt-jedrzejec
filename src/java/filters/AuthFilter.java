@@ -23,15 +23,15 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"*.xhtml"})
 public class AuthFilter implements Filter {
-    
+
     public AuthFilter() {
     }
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        
+
     }
-    
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
@@ -44,15 +44,14 @@ public class AuthFilter implements Filter {
             String reqURI = req.getRequestURI();
             if (reqURI.contains("/admin") && ses != null && ses.getAttribute("login") != null && ses.getAttribute("role").equals(1)) {
                 chain.doFilter(request, response);
-            } else if (!reqURI.contains("/admin") && (reqURI.indexOf("/login.xhtml") >= 0 || (ses != null && ses.getAttribute("login") != null)
-                    //                    || reqURI.indexOf("/faces/") >= 0 || reqURI.contains("javax.faces.resource") 
-                    || reqURI.indexOf("/index") >= 0)) {
+            } else if (!reqURI.contains("/admin") && (reqURI.indexOf("/login.xhtml") >= 0 || (ses != null && ses.getAttribute("login") != null) //                    || reqURI.indexOf("/faces/") >= 0 || reqURI.contains("javax.faces.resource") 
+                    )) {
                 chain.doFilter(request, response);
             } else // user didn't log in but asking for a page that is not allowed so take user to login page
             {
                 res.sendRedirect(req.getContextPath() + "/faces/login.xhtml");  // Anonymous user. Redirect to login page
             }
-            
+
         } catch (Throwable t) {
             System.out.println(t.getMessage());
         }
@@ -60,6 +59,6 @@ public class AuthFilter implements Filter {
 
     @Override
     public void destroy() {
-        
+
     }
 }

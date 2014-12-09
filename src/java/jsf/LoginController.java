@@ -28,7 +28,7 @@ public class LoginController implements Serializable {
     private static final long serialVersionUID = 1L;
     private String password;
     private String message, uname;
-    private boolean isAdmin = false;
+    private boolean isAdmin;
 
     public String getMessage() {
         return message;
@@ -56,7 +56,7 @@ public class LoginController implements Serializable {
 
     public boolean getIsAdmin() {
         HttpSession session = Util.getSession();
-        isAdmin = (session.getAttribute("role") == "administrator");
+        isAdmin = (session.getAttribute("role").equals(1));
         return isAdmin;
     }
 
@@ -70,7 +70,6 @@ public class LoginController implements Serializable {
             HttpSession session = Util.getSession();
             session.setAttribute("login", uname);
             session.setAttribute("role", p.getRola().getId());
-            JsfUtil.addErrorMessage(session.getAttribute("role").toString());
             return "index";
         } else {
             JsfUtil.addErrorMessage("Login Fail!");
