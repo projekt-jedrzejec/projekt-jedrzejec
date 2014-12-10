@@ -12,8 +12,7 @@
             <h:form id="ElementCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{elementController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateElementLabel_idElementu}" for="idElementu" />
-                        <p:inputText id="idElementu" value="#{elementController.selected.idElementu}" title="#{bundle.CreateElementTitle_idElementu}" required="true" requiredMessage="#{bundle.CreateElementRequiredMessage_idElementu}"/>
+
                         <p:outputLabel value="#{bundle.CreateElementLabel_nazwa}" for="nazwa" />
                         <p:inputText id="nazwa" value="#{elementController.selected.nazwa}" title="#{bundle.CreateElementTitle_nazwa}" />
                         <p:outputLabel value="#{bundle.CreateElementLabel_nrEwidencyjny}" for="nrEwidencyjny" />

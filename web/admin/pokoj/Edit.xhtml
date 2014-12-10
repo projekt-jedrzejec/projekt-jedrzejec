@@ -12,8 +12,7 @@
             <h:form id="PokojEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pokojController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPokojLabel_idPokoju}" for="idPokoju" />
-                        <p:inputText id="idPokoju" value="#{pokojController.selected.idPokoju}" title="#{bundle.EditPokojTitle_idPokoju}" required="true" requiredMessage="#{bundle.EditPokojRequiredMessage_idPokoju}"/>
+
                         <p:outputLabel value="#{bundle.EditPokojLabel_pokoj}" for="pokoj" />
                         <p:inputText id="pokoj" value="#{pokojController.selected.pokoj}" title="#{bundle.EditPokojTitle_pokoj}" required="true" requiredMessage="#{bundle.EditPokojRequiredMessage_pokoj}"/>
                     </p:panelGrid>

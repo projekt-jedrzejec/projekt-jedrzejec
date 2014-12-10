@@ -12,8 +12,7 @@
             <h:form id="TypCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{typController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateTypLabel_idTypu}" for="idTypu" />
-                        <p:inputText id="idTypu" value="#{typController.selected.idTypu}" title="#{bundle.CreateTypTitle_idTypu}" required="true" requiredMessage="#{bundle.CreateTypRequiredMessage_idTypu}"/>
+
                         <p:outputLabel value="#{bundle.CreateTypLabel_typ}" for="typ" />
                         <p:inputText id="typ" value="#{typController.selected.typ}" title="#{bundle.CreateTypTitle_typ}" required="true" requiredMessage="#{bundle.CreateTypRequiredMessage_typ}"/>
                     </p:panelGrid>

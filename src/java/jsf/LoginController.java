@@ -65,11 +65,13 @@ public class LoginController implements Serializable {
     }
 
     public String loginProject() {
-        Pracownik p = getFacede().login(uname, password);
+        String zahashowaneHaslo = getFacede().haszuj(password);
+        Pracownik p = getFacede().login(uname, zahashowaneHaslo);
         if (p != null) {
             HttpSession session = Util.getSession();
             session.setAttribute("login", uname);
             session.setAttribute("role", p.getRola().getId());
+            session.setAttribute("userid", p.getIdPracownika());
             return "index";
         } else {
             JsfUtil.addErrorMessage("Login Fail!");

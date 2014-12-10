@@ -12,8 +12,7 @@
             <h:form id="SalaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{salaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSalaLabel_idSali}" for="idSali" />
-                        <p:inputText id="idSali" value="#{salaController.selected.idSali}" title="#{bundle.CreateSalaTitle_idSali}" required="true" requiredMessage="#{bundle.CreateSalaRequiredMessage_idSali}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateSalaLabel_sala}" for="sala" />
                         <p:inputText id="sala" value="#{salaController.selected.sala}" title="#{bundle.CreateSalaTitle_sala}" required="true" requiredMessage="#{bundle.CreateSalaRequiredMessage_sala}"/>
                     </p:panelGrid>

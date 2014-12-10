@@ -7,13 +7,10 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-
         <p:dialog id="PokojCreateDlg" widgetVar="PokojCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePokojTitle}">
             <h:form id="PokojCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pokojController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePokojLabel_idPokoju}" for="idPokoju" />
-                        <p:inputText id="idPokoju" value="#{pokojController.selected.idPokoju}" title="#{bundle.CreatePokojTitle_idPokoju}" required="true" requiredMessage="#{bundle.CreatePokojRequiredMessage_idPokoju}"/>
                         <p:outputLabel value="#{bundle.CreatePokojLabel_pokoj}" for="pokoj" />
                         <p:inputText id="pokoj" value="#{pokojController.selected.pokoj}" title="#{bundle.CreatePokojTitle_pokoj}" required="true" requiredMessage="#{bundle.CreatePokojRequiredMessage_pokoj}"/>
                     </p:panelGrid>

@@ -24,14 +24,13 @@
                         <h:outputText value="#{pracownikController.selected.email}" title="#{bundle.ViewPracownikTitle_email}"/>
                         <h:outputText value="#{bundle.ViewPracownikLabel_login}"/>
                         <h:outputText value="#{pracownikController.selected.login}" title="#{bundle.ViewPracownikTitle_login}"/>
-                        <h:outputText value="#{bundle.ViewPracownikLabel_password}"/>
-                        <h:outputText value="#{pracownikController.selected.password}" title="#{bundle.ViewPracownikTitle_password}"/>
+
                         <h:outputText value="#{bundle.ViewPracownikLabel_pokoj}"/>
-                        <h:outputText value="#{pracownikController.selected.pokoj}" title="#{bundle.ViewPracownikTitle_pokoj}"/>
+                        <h:outputText value="#{pracownikController.selected.pokoj.pokoj}" title="#{bundle.ViewPracownikTitle_pokoj}"/>
                         <h:outputText value="#{bundle.ViewPracownikLabel_rola}"/>
-                        <h:outputText value="#{pracownikController.selected.rola}" title="#{bundle.ViewPracownikTitle_rola}"/>
+                        <h:outputText value="#{pracownikController.selected.rola.nazwa}" title="#{bundle.ViewPracownikTitle_rola}"/>
                         <h:outputText value="#{bundle.ViewPracownikLabel_stanowisko}"/>
-                        <h:outputText value="#{pracownikController.selected.stanowisko}" title="#{bundle.ViewPracownikTitle_stanowisko}"/>
+                        <h:outputText value="#{pracownikController.selected.stanowisko.stanowisko}" title="#{bundle.ViewPracownikTitle_stanowisko}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PracownikViewDialog.hide()"/>
                 </h:panelGroup>

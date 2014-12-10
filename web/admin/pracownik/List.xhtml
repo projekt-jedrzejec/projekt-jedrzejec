@@ -63,29 +63,24 @@
                             </f:facet>
                             <h:outputText value="#{item.login}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPracownikTitle_password}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </p:column>
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_pokoj}"/>
                             </f:facet>
-                            <h:outputText value="#{item.pokoj}"/>
+                            <h:outputText value="#{item.pokoj.pokoj}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_rola}"/>
                             </f:facet>
-                            <h:outputText value="#{item.rola}"/>
+                            <h:outputText value="#{item.rola.nazwa}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_stanowisko}"/>
                             </f:facet>
-                            <h:outputText value="#{item.stanowisko}"/>
+                            <h:outputText value="#{item.stanowisko.stanowisko}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pracownikController.prepareCreate}" update=":PracownikCreateForm" oncomplete="PF('PracownikCreateDialog').show()"/>

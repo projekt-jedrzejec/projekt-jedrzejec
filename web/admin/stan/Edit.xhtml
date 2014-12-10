@@ -12,8 +12,7 @@
             <h:form id="StanEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{stanController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditStanLabel_idStanu}" for="idStanu" />
-                        <p:inputText id="idStanu" value="#{stanController.selected.idStanu}" title="#{bundle.EditStanTitle_idStanu}" required="true" requiredMessage="#{bundle.EditStanRequiredMessage_idStanu}"/>
+
                         <p:outputLabel value="#{bundle.EditStanLabel_stan}" for="stan" />
                         <p:inputText id="stan" value="#{stanController.selected.stan}" title="#{bundle.EditStanTitle_stan}" required="true" requiredMessage="#{bundle.EditStanRequiredMessage_stan}"/>
                     </p:panelGrid>

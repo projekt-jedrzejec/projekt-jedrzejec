@@ -12,8 +12,7 @@
             <h:form id="RolaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRolaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{rolaController.selected.id}" title="#{bundle.CreateRolaTitle_id}" required="true" requiredMessage="#{bundle.CreateRolaRequiredMessage_id}"/>
+                     
                         <p:outputLabel value="#{bundle.CreateRolaLabel_nazwa}" for="nazwa" />
                         <p:inputText id="nazwa" value="#{rolaController.selected.nazwa}" title="#{bundle.CreateRolaTitle_nazwa}" required="true" requiredMessage="#{bundle.CreateRolaRequiredMessage_nazwa}"/>
                     </p:panelGrid>

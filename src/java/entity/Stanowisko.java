@@ -11,7 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,10 +35,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Stanowisko.findByIdStanowiska", query = "SELECT s FROM Stanowisko s WHERE s.idStanowiska = :idStanowiska"),
     @NamedQuery(name = "Stanowisko.findByStanowisko", query = "SELECT s FROM Stanowisko s WHERE s.stanowisko = :stanowisko")})
 public class Stanowisko implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_stanowiska")
     private Integer idStanowiska;
     @Basic(optional = false)
@@ -45,7 +47,7 @@ public class Stanowisko implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "stanowisko")
     private String stanowisko;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stanowisko", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "stanowisko")
     private List<Pracownik> pracownikList;
 
     public Stanowisko() {
@@ -109,5 +111,5 @@ public class Stanowisko implements Serializable {
     public String toString() {
         return stanowisko;
     }
-    
+
 }

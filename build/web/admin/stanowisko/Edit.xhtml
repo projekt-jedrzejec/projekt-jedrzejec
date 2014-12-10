@@ -12,8 +12,7 @@
             <h:form id="StanowiskoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{stanowiskoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditStanowiskoLabel_idStanowiska}" for="idStanowiska" />
-                        <p:inputText id="idStanowiska" value="#{stanowiskoController.selected.idStanowiska}" title="#{bundle.EditStanowiskoTitle_idStanowiska}" required="true" requiredMessage="#{bundle.EditStanowiskoRequiredMessage_idStanowiska}"/>
+
                         <p:outputLabel value="#{bundle.EditStanowiskoLabel_stanowisko}" for="stanowisko" />
                         <p:inputText id="stanowisko" value="#{stanowiskoController.selected.stanowisko}" title="#{bundle.EditStanowiskoTitle_stanowisko}" required="true" requiredMessage="#{bundle.EditStanowiskoRequiredMessage_stanowisko}"/>
                     </p:panelGrid>

@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition>
 
@@ -12,8 +13,9 @@
             <h:form id="PracownikEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pracownikController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPracownikLabel_idPracownika}" for="idPracownika" />
-                        <p:inputText id="idPracownika" value="#{pracownikController.selected.idPracownika}" title="#{bundle.EditPracownikTitle_idPracownika}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_idPracownika}"/>
+
+                        
+
                         <p:outputLabel value="#{bundle.EditPracownikLabel_imie}" for="imie" />
                         <p:inputText id="imie" value="#{pracownikController.selected.imie}" title="#{bundle.EditPracownikTitle_imie}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_imie}"/>
                         <p:outputLabel value="#{bundle.EditPracownikLabel_nazwisko}" for="nazwisko" />
@@ -25,7 +27,7 @@
                         <p:outputLabel value="#{bundle.EditPracownikLabel_login}" for="login" />
                         <p:inputText id="login" value="#{pracownikController.selected.login}" title="#{bundle.EditPracownikTitle_login}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_login}"/>
                         <p:outputLabel value="#{bundle.EditPracownikLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{pracownikController.selected.password}" title="#{bundle.EditPracownikTitle_password}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_password}"/>
+                        <p:inputText id="password" value="#{pracownikController.haslo}" title="#{bundle.EditPracownikTitle_password}" required="false" />
                         <p:outputLabel value="#{bundle.EditPracownikLabel_pokoj}" for="pokoj" />
                         <p:selectOneMenu id="pokoj" value="#{pracownikController.selected.pokoj}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

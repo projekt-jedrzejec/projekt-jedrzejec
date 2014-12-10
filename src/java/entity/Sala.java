@@ -10,7 +10,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,10 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sala.findByIdSali", query = "SELECT s FROM Sala s WHERE s.idSali = :idSali"),
     @NamedQuery(name = "Sala.findBySala", query = "SELECT s FROM Sala s WHERE s.sala = :sala")})
 public class Sala implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_sali")
     private Integer idSali;
     @Basic(optional = false)
@@ -44,7 +46,7 @@ public class Sala implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "sala")
     private String sala;
-    @OneToMany(mappedBy = "sala", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "sala")
     private List<Element> elementList;
 
     public Sala() {
@@ -108,5 +110,5 @@ public class Sala implements Serializable {
     public String toString() {
         return sala;
     }
-    
+
 }

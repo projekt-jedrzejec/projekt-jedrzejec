@@ -10,7 +10,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -33,10 +34,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pokoj.findByIdPokoju", query = "SELECT p FROM Pokoj p WHERE p.idPokoju = :idPokoju"),
     @NamedQuery(name = "Pokoj.findByPokoj", query = "SELECT p FROM Pokoj p WHERE p.pokoj = :pokoj")})
 public class Pokoj implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_pokoju")
     private Integer idPokoju;
     @Basic(optional = false)
@@ -44,7 +46,7 @@ public class Pokoj implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "pokoj")
     private String pokoj;
-    @OneToMany(mappedBy = "pokoj", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pokoj")
     private List<Pracownik> pracownikList;
 
     public Pokoj() {
@@ -108,5 +110,5 @@ public class Pokoj implements Serializable {
     public String toString() {
         return pokoj;
     }
-    
+
 }

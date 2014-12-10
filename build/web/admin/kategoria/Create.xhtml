@@ -12,8 +12,7 @@
             <h:form id="KategoriaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kategoriaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateKategoriaLabel_idKategorii}" for="idKategorii" />
-                        <p:inputText id="idKategorii" value="#{kategoriaController.selected.idKategorii}" title="#{bundle.CreateKategoriaTitle_idKategorii}" required="true" requiredMessage="#{bundle.CreateKategoriaRequiredMessage_idKategorii}"/>
+                       
                         <p:outputLabel value="#{bundle.CreateKategoriaLabel_kategoria}" for="kategoria" />
                         <p:inputText id="kategoria" value="#{kategoriaController.selected.kategoria}" title="#{bundle.CreateKategoriaTitle_kategoria}" required="true" requiredMessage="#{bundle.CreateKategoriaRequiredMessage_kategoria}"/>
                     </p:panelGrid>

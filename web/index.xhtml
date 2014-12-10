@@ -26,6 +26,10 @@
             <br />
             <h:link outcome="/admin/typ/List" value="Show All Typ Items"/>
         </c:if>
+        <br />
+        <h:link outcome="/panel" value="Panel użytkownika"/>
+        <br />
+        #{flash.msg}
         <h:form>      
             <p>Welcome, #{loginController.uname}</p>
             <p:commandButton action="#{loginController.logout}" value="Logout"  ajax="false"></p:commandButton>

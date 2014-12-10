@@ -11,7 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,8 +38,8 @@ public class Kategoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_kategorii")
     private Integer idKategorii;
     @Basic(optional = false)
@@ -46,7 +47,7 @@ public class Kategoria implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "kategoria")
     private String kategoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kategoria", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kategoria")
     private List<Element> elementList;
 
     public Kategoria() {

@@ -12,8 +12,7 @@
             <h:form id="StanowiskoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{stanowiskoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateStanowiskoLabel_idStanowiska}" for="idStanowiska" />
-                        <p:inputText id="idStanowiska" value="#{stanowiskoController.selected.idStanowiska}" title="#{bundle.CreateStanowiskoTitle_idStanowiska}" required="true" requiredMessage="#{bundle.CreateStanowiskoRequiredMessage_idStanowiska}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateStanowiskoLabel_stanowisko}" for="stanowisko" />
                         <p:inputText id="stanowisko" value="#{stanowiskoController.selected.stanowisko}" title="#{bundle.CreateStanowiskoTitle_stanowisko}" required="true" requiredMessage="#{bundle.CreateStanowiskoRequiredMessage_stanowisko}"/>
                     </p:panelGrid>

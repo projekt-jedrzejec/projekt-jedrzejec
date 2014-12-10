@@ -12,8 +12,7 @@
             <h:form id="TypEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{typController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditTypLabel_idTypu}" for="idTypu" />
-                        <p:inputText id="idTypu" value="#{typController.selected.idTypu}" title="#{bundle.EditTypTitle_idTypu}" required="true" requiredMessage="#{bundle.EditTypRequiredMessage_idTypu}"/>
+
                         <p:outputLabel value="#{bundle.EditTypLabel_typ}" for="typ" />
                         <p:inputText id="typ" value="#{typController.selected.typ}" title="#{bundle.EditTypTitle_typ}" required="true" requiredMessage="#{bundle.EditTypRequiredMessage_typ}"/>
                     </p:panelGrid>

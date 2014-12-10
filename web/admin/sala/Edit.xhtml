@@ -12,8 +12,7 @@
             <h:form id="SalaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{salaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSalaLabel_idSali}" for="idSali" />
-                        <p:inputText id="idSali" value="#{salaController.selected.idSali}" title="#{bundle.EditSalaTitle_idSali}" required="true" requiredMessage="#{bundle.EditSalaRequiredMessage_idSali}"/>
+
                         <p:outputLabel value="#{bundle.EditSalaLabel_sala}" for="sala" />
                         <p:inputText id="sala" value="#{salaController.selected.sala}" title="#{bundle.EditSalaTitle_sala}" required="true" requiredMessage="#{bundle.EditSalaRequiredMessage_sala}"/>
                     </p:panelGrid>

@@ -11,7 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -43,8 +44,8 @@ public class Element implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_elementu")
     private Integer idElementu;
     @Size(max = 80)
@@ -65,19 +66,19 @@ public class Element implements Serializable {
     @Column(name = "uwagi")
     private String uwagi;
     @JoinColumn(name = "kategoria", referencedColumnName = "id_kategorii")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Kategoria kategoria;
     @JoinColumn(name = "osoba_odpowiedzialna", referencedColumnName = "id_pracownika")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Pracownik osobaOdpowiedzialna;
     @JoinColumn(name = "sala", referencedColumnName = "id_sali")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Sala sala;
     @JoinColumn(name = "stan", referencedColumnName = "id_stanu")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Stan stan;
     @JoinColumn(name = "typ", referencedColumnName = "id_typu")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Typ typ;
 
     public Element() {
