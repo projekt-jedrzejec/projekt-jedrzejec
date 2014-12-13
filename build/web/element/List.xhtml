@@ -102,7 +102,30 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{elementController.destroy}" update=":growl,datalist" disabled="#{empty elementController.selected}"/>
                         </f:facet>
                     </p:dataTable>
+                     aaa
+                <h:commandLink>
+                        <p:graphicImage name="images/excel.png" />
+                        <h:outputText value="XLS"/>
+                        <p:dataExporter type="xls" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink id="pdf">
+                       <!-- <p:graphicImage name="images/pdf.png" />-->
+                       <h:outputText value="PDF"/>
+                        <p:dataExporter type="pdf" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="images/csv.png" />
+                        <h:outputText value="CSV"/>
+                        <p:dataExporter type="csv" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage name="images/xml.png" />
+                        <h:outputText value="XML"/>
+                        <p:dataExporter type="xml" target="datalist" fileName="Etap" encoding="ISO-8859-2" />
+                    </h:commandLink>
                 </p:panel>
+               
             </h:form>
 
             <ui:include src="Create.xhtml"/>

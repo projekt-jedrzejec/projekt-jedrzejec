@@ -9,27 +9,31 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <h:link outcome="/element/List" value="Show All Element Items"/>
-        <br />
-        <c:if test="#{loginController.isAdmin}">
-            <h:link outcome="/admin/kategoria/List" value="Show All Kategoria Items"/>
-            <br />
-            <h:link outcome="/admin/pokoj/List" value="Show All Pokoj Items"/>
-            <br />
-            <h:link outcome="/admin/pracownik/List" value="Show All Pracownik Items"/>
-            <br />
-            <h:link outcome="/admin/sala/List" value="Show All Sala Items"/>
-            <br />
-            <h:link outcome="/admin/stan/List" value="Show All Stan Items"/>
-            <br />
-            <h:link outcome="/admin/stanowisko/List" value="Show All Stanowisko Items"/>
-            <br />
-            <h:link outcome="/admin/typ/List" value="Show All Typ Items"/>
-        </c:if>
-        <br />
-        <h:link outcome="/panel" value="Panel użytkownika"/>
-        <br />
-        #{flash.msg}
+        <h:form>
+            <p:menu>
+                <p:submenu label="Zarzadzanie">
+                    <p:menuitem outcome="/element/List" value="Element"/>
+
+                    <c:if test="#{loginController.isAdmin}">
+                        <p:menuitem outcome="/admin/kategoria/List" value="Kategoria"></p:menuitem>
+
+                        <p:menuitem outcome="/admin/pokoj/List" value="Pokoj"></p:menuitem>
+
+                        <p:menuitem outcome="/admin/pracownik/List" value="Pracownik"></p:menuitem>
+
+                        <p:menuitem outcome="/admin/sala/List" value="Sala"></p:menuitem>
+
+                        <p:menuitem outcome="/admin/stan/List" value="Stan"></p:menuitem>
+
+                        <p:menuitem outcome="/admin/stanowisko/List" value="Stanowisko"></p:menuitem>
+
+                        <p:menuitem outcome="/admin/typ/List" value="Typ"></p:menuitem>
+                    </c:if>
+
+                    <p:menuitem outcome="/panel" value="Panel użytkownika"></p:menuitem>
+                </p:submenu>
+            </p:menu>
+        </h:form>
         <h:form>      
             <p>Welcome, #{loginController.uname}</p>
             <p:commandButton action="#{loginController.logout}" value="Logout"  ajax="false"></p:commandButton>
