@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition>
+
+        <p:dialog id="ElementCreateDlg" widgetVar="ElementCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateElementTitle}">
+            <h:form id="ElementCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{elementController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateElementLabel_nazwa}" for="nazwa" />
+                        <p:inputText id="nazwa" value="#{elementController.selected.nazwa}" title="#{bundle.CreateElementTitle_nazwa}" />
+                        <p:outputLabel value="#{bundle.CreateElementLabel_nrEwidencyjny}" for="nrEwidencyjny" />
+                        <p:inputText id="nrEwidencyjny" value="#{elementController.selected.nrEwidencyjny}" title="#{bundle.CreateElementTitle_nrEwidencyjny}" />
+                        <p:outputLabel value="#{bundle.CreateElementLabel_wartoscEwidencyjna}" for="wartoscEwidencyjna" />
+                        <p:inputText id="wartoscEwidencyjna" value="#{elementController.selected.wartoscEwidencyjna}" title="#{bundle.CreateElementTitle_wartoscEwidencyjna}" required="true" requiredMessage="#{bundle.CreateElementRequiredMessage_wartoscEwidencyjna}"/>
+                        <p:outputLabel value="#{bundle.CreateElementLabel_dataZakupu}" for="dataZakupu" />
+                        <p:calendar id="dataZakupu" pattern="MM/dd/yyyy" value="#{elementController.selected.dataZakupu}" title="#{bundle.EditElementTitle_dataZakupu}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateElementLabel_uwagi}" for="uwagi" />
+                        <p:inputText id="uwagi" value="#{elementController.selected.uwagi}" title="#{bundle.CreateElementTitle_uwagi}" />
+                        <p:outputLabel value="#{bundle.CreateElementLabel_kategoria}" for="kategoria" />
+                        <p:selectOneMenu id="kategoria" value="#{elementController.selected.kategoria}" required="true" requiredMessage="#{bundle.EditElementRequiredMessage_kategoria}">
+                            <f:selectItems value="#{kategoriaController.itemsAvailableSelectOne}"
+                                           var="kategoriaItem"
+                                           itemValue="#{kategoriaItem}"/>
+                        </p:selectOneMenu>
+                        <c:if test="#{loginController.isAdmin}">
+                              <p:outputLabel value="#{bundle.CreateElementLabel_osobaOdpowiedzialna}" for="osobaOdpowiedzialna" />
+                            <p:selectOneMenu id="osobaOdpowiedzialna" value="#{elementController.selected.osobaOdpowiedzialna}" >
+                                <f:selectItems value="#{pracownikController.itemsAvailableSelectOne}"
+                                               var="osobaOdpowiedzialnaItem"
+                                               itemValue="#{osobaOdpowiedzialnaItem}"/>
+                            </p:selectOneMenu>
+                        </c:if>
+                        <p:outputLabel value="#{bundle.CreateElementLabel_sala}" for="sala" />
+                        <p:selectOneMenu id="sala" value="#{elementController.selected.sala}" >
+                            <f:selectItems value="#{salaController.itemsAvailableSelectOne}"
+                                           var="salaItem"
+                                           itemValue="#{salaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateElementLabel_stan}" for="stan" />
+                        <p:selectOneMenu id="stan" value="#{elementController.selected.stan}" required="true" requiredMessage="#{bundle.EditElementRequiredMessage_stan}">
+                            <f:selectItems value="#{stanController.itemsAvailableSelectOne}"
+                                           var="stanItem"
+                                           itemValue="#{stanItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateElementLabel_typ}" for="typ" />
+                        <p:selectOneMenu id="typ" value="#{elementController.selected.typ}" required="true" requiredMessage="#{bundle.EditElementRequiredMessage_typ}">
+                            <f:selectItems value="#{typController.itemsAvailableSelectOne}"
+                                           var="typItem"
+                                           itemValue="#{typItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{elementController.create}" value="#{bundle.Save}" update="display,:ElementListForm:datalist,:growl" oncomplete="handleSubmit(args,'ElementCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true" onclick="ElementCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
