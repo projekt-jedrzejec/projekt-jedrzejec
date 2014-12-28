@@ -6,9 +6,15 @@
 package session;
 
 import entity.Element;
+import entity.Pracownik;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
+import jsf.Util;
 
 /**
  *
@@ -16,8 +22,16 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ElementFacade extends AbstractFacade<Element> {
+    
+    @EJB
+    private PracownikFacade pf;
+
     @PersistenceContext(unitName = "ZarzadzanieTestPU")
     private EntityManager em;
+    
+    private PracownikFacade getFacede() {
+        return pf;
+    }
 
     @Override
     protected EntityManager getEntityManager() {
@@ -27,5 +41,13 @@ public class ElementFacade extends AbstractFacade<Element> {
     public ElementFacade() {
         super(Element.class);
     }
-    
+
+    public List<Element> wyswietlElementy() {
+        HttpSession s = Util.getSession();
+        Pracownik p = getFacede().find(s.getAttribute("userid"));
+        Query q = em.createQuery("Select e from Element e where e.osobaOdpowiedzialna = :user");
+        q.setParameter("user", p);
+        return q.getResultList();
+    }
+
 }

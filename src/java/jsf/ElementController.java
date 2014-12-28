@@ -1,6 +1,7 @@
 package jsf;
 
 import entity.Element;
+import entity.Pracownik;
 import jsf.util.JsfUtil;
 import jsf.util.JsfUtil.PersistAction;
 import session.ElementFacade;
@@ -18,11 +19,15 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpSession;
+import session.PracownikFacade;
 
 @ManagedBean(name = "elementController")
 @SessionScoped
 public class ElementController implements Serializable {
 
+    @EJB
+    private PracownikFacade pf;
     @EJB
     private session.ElementFacade ejbFacade;
     private List<Element> items = null;
@@ -47,6 +52,10 @@ public class ElementController implements Serializable {
 
     private ElementFacade getFacade() {
         return ejbFacade;
+    }
+
+    private PracownikFacade getPracownikFacade() {
+        return pf;
     }
 
     public Element prepareCreate() {
@@ -75,8 +84,13 @@ public class ElementController implements Serializable {
     }
 
     public List<Element> getItems() {
+        HttpSession s = Util.getSession();
         if (items == null) {
-            items = getFacade().findAll();
+            if (s.getAttribute("role").equals(1)) {
+                items = getFacade().findAll();
+            } else {
+                items = getFacade().wyswietlElementy();
+            }
         }
         return items;
     }
