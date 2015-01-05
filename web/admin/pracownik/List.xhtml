@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="PracownikListForm">
-                <p:panel header="#{bundle.ListPracownikTitle}">
+                <p:panel >
                     <p:dataTable id="datalist" value="#{pracownikController.items}" var="item"
                                  selectionMode="single" selection="#{pracownikController.selected}"
                                  paginator="true"
@@ -33,50 +33,50 @@
                             </f:facet>
                             <h:outputText value="#{item.idPracownika}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  filterBy="#{item.imie}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_imie}"/>
                             </f:facet>
                             <h:outputText value="#{item.imie}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  filterBy="#{item.nazwisko}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_nazwisko}"/>
                             </f:facet>
                             <h:outputText value="#{item.nazwisko}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.nrTelefonu}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_nrTelefonu}"/>
                             </f:facet>
                             <h:outputText value="#{item.nrTelefonu}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  filterBy="#{item.email}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_email}"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  filterBy="#{item.login}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_login}"/>
                             </f:facet>
                             <h:outputText value="#{item.login}"/>
                         </p:column>
 
-                        <p:column>
+                        <p:column  filterBy="#{item.pokoj}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_pokoj}"/>
                             </f:facet>
                             <h:outputText value="#{item.pokoj.pokoj}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.rola}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_rola}"/>
                             </f:facet>
                             <h:outputText value="#{item.rola.nazwa}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  filterBy="#{item.stanowisko}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPracownikTitle_stanowisko}"/>
                             </f:facet>
@@ -89,6 +89,22 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pracownikController.destroy}" update=":growl,datalist" disabled="#{empty pracownikController.selected}"/>
                         </f:facet>
                     </p:dataTable>
+                    <h:commandLink>
+                        <p:graphicImage name="images/xls.png" />
+                        <p:dataExporter type="xls" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink id="pdf">
+                        <p:graphicImage name="images/pdf.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="images/csv.png" />
+                        <p:dataExporter type="csv" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="images/xml.png" />
+                        <p:dataExporter type="xml" target="datalist" fileName="Etap" encoding="ISO-8859-2" />
+                    </h:commandLink>
                 </p:panel>
             </h:form>
 

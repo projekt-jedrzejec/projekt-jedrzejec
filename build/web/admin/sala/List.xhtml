@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="SalaListForm">
-                <p:panel header="#{bundle.ListSalaTitle}">
+                <p:panel >
                     <p:dataTable id="datalist" value="#{salaController.items}" var="item"
                                  selectionMode="single" selection="#{salaController.selected}"
                                  paginator="true"
@@ -33,7 +33,7 @@
                             </f:facet>
                             <h:outputText value="#{item.idSali}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.sala}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSalaTitle_sala}"/>
                             </f:facet>
@@ -46,6 +46,22 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{salaController.destroy}" update=":growl,datalist" disabled="#{empty salaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
+                    <h:commandLink>
+                        <p:graphicImage name="images/xls.png" />
+                        <p:dataExporter type="xls" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink id="pdf">
+                        <p:graphicImage name="images/pdf.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="images/csv.png" />
+                        <p:dataExporter type="csv" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="images/xml.png" />
+                        <p:dataExporter type="xml" target="datalist" fileName="Etap" encoding="ISO-8859-2" />
+                    </h:commandLink>
                 </p:panel>
             </h:form>
 

@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="RolaListForm">
-                <p:panel header="#{bundle.ListRolaTitle}">
+                <p:panel >
                     <p:dataTable id="datalist" value="#{rolaController.items}" var="item"
                                  selectionMode="single" selection="#{rolaController.selected}"
                                  paginator="true"
@@ -33,7 +33,7 @@
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column>
+                        <p:column  filterBy="#{item.nazwa}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListRolaTitle_nazwa}"/>
                             </f:facet>
@@ -46,6 +46,22 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{rolaController.destroy}" update=":growl,datalist" disabled="#{empty rolaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
+                    <h:commandLink>
+                        <p:graphicImage name="images/xls.png" />
+                        <p:dataExporter type="xls" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink id="pdf">
+                        <p:graphicImage name="images/pdf.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="images/csv.png" />
+                        <p:dataExporter type="csv" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                    </h:commandLink>
+                    <h:commandLink>
+                        <p:graphicImage name="images/xml.png" />
+                        <p:dataExporter type="xml" target="datalist" fileName="Etap" encoding="ISO-8859-2" />
+                    </h:commandLink>
                 </p:panel>
             </h:form>
 

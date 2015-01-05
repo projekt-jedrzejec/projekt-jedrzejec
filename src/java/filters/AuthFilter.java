@@ -36,26 +36,24 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
 
-            // check whether session variable is set
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
             HttpSession ses = req.getSession(false);
-            //  allow user to proccede if url is login.xhtml or user logged in or user is accessing any page in //public folder
+
             String reqURI = req.getRequestURI();
             if (reqURI.contains("/admin") && ses != null && ses.getAttribute("login") != null && ses.getAttribute("role").equals(1)) {
                 chain.doFilter(request, response);
             } else if (!reqURI.contains("/admin") && (reqURI.indexOf("/login.xhtml") >= 0 || (ses != null && ses.getAttribute("login") != null) //                    || reqURI.indexOf("/faces/") >= 0 || reqURI.contains("javax.faces.resource") 
                     )) {
                 chain.doFilter(request, response);
-            } else // user didn't log in but asking for a page that is not allowed so take user to login page
-            {
-                res.sendRedirect(req.getContextPath() + "/faces/login.xhtml");  // Anonymous user. Redirect to login page
+            } else {
+                res.sendRedirect(req.getContextPath() + "/faces/login.xhtml");
             }
 
         } catch (Throwable t) {
             System.out.println(t.getMessage());
         }
-    } //doFilter
+    }
 
     @Override
     public void destroy() {

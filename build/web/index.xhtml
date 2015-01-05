@@ -10,34 +10,52 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:menu>
-                <p:submenu label="Zarzadzanie">
-                    <p:menuitem outcome="/element/List" value="Element"/>
 
-                    <c:if test="#{loginController.isAdmin}">
-                        <p:menuitem outcome="/admin/kategoria/List" value="Kategoria"></p:menuitem>
 
-                        <p:menuitem outcome="/admin/pokoj/List" value="Pokoj"></p:menuitem>
+            <p:menubar>
+                <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                <p:menuitem outcome="/panel" value="Panel użytkownika" />
+                <p:menuitem value="Logout" action="#{loginController.logout}" style="position:absolute; right:4px;"/>
 
-                        <p:menuitem outcome="/admin/pracownik/List" value="Pracownik"></p:menuitem>
-
-                        <p:menuitem outcome="/admin/sala/List" value="Sala"></p:menuitem>
-
-                        <p:menuitem outcome="/admin/stan/List" value="Stan"></p:menuitem>
-
-                        <p:menuitem outcome="/admin/stanowisko/List" value="Stanowisko"></p:menuitem>
-
-                        <p:menuitem outcome="/admin/typ/List" value="Typ"></p:menuitem>
-                    </c:if>
-
-                    <p:menuitem outcome="/panel" value="Panel użytkownika"></p:menuitem>
-                </p:submenu>
-            </p:menu>
-        </h:form>
-        <h:form>      
+            </p:menubar> 
             <p>Welcome, #{loginController.uname}</p>
-            <p:commandButton action="#{loginController.logout}" value="Logout"  ajax="false"></p:commandButton>
+            <c:if test="#{loginController.isAdmin}">
+                <p:button styleClass="zarz1" value="Środki" outcome="/index_1" />
+                <p:button styleClass="zarz2" value="Pracownicy" outcome="/index_2" />
+                <style >
+                    .ui-button.zarz1 {
+                        width: 200px;
+                        height: 200px;
+                        margin-left: 1em;
+                        display:inline-block;
+                        font-size: 30px !important;
+                        font-family:calibri;
+                        
+                    }
+                    .ui-button.zarz2 {
+                        width: 200px;
+                        height: 200px;
+                        margin-left: 1em;
+                        display:inline-block;
+                        font-size: 30px !important;
+                        font-family:calibri;
+                    }
+
+
+                </style>
+            </c:if>
+            <c:if test="#{!loginController.isAdmin}">
+                <p>Welcome, #{loginController.uname}</p>
+                <p:menu>
+                    <p:submenu label="Zarzadzanie">
+                        <p:menuitem outcome="/element/List" value="Element"/>
+                        <p:menuitem outcome="/panel" value="Panel użytkownika"></p:menuitem>
+                    </p:submenu>
+                </p:menu> 
+            </c:if> 
+
         </h:form>
+
 
     </h:body>
 
