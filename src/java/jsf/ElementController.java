@@ -19,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import session.PracownikFacade;
 
@@ -85,13 +86,13 @@ public class ElementController implements Serializable {
 
     public List<Element> getItems() {
         HttpSession s = Util.getSession();
-        if (items == null) {
-            if (s.getAttribute("role").equals(1)) {
-                items = getFacade().findAll();
-            } else {
-                items = getFacade().wyswietlElementy();
-            }
+
+        if (s.getAttribute("role").equals(1)) {
+            items = getFacade().findAll();
+        } else {
+            items = getFacade().wyswietlElementy();
         }
+
         return items;
     }
 

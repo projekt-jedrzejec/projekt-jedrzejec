@@ -7,6 +7,7 @@ package session;
 
 import entity.Element;
 import entity.Pracownik;
+import entity.Sala;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -22,13 +23,13 @@ import jsf.Util;
  */
 @Stateless
 public class ElementFacade extends AbstractFacade<Element> {
-    
+
     @EJB
     private PracownikFacade pf;
 
     @PersistenceContext(unitName = "ZarzadzanieTestPU")
     private EntityManager em;
-    
+
     private PracownikFacade getFacede() {
         return pf;
     }
@@ -47,6 +48,13 @@ public class ElementFacade extends AbstractFacade<Element> {
         Pracownik p = getFacede().find(s.getAttribute("userid"));
         Query q = em.createQuery("Select e from Element e where e.osobaOdpowiedzialna = :user");
         q.setParameter("user", p);
+        return q.getResultList();
+    }
+
+    public List<Element> showElementsBySala(Sala sala) {
+        HttpSession s = Util.getSession();
+        Query q = em.createQuery("Select e from Element e where e.sala = :sala");
+        q.setParameter("sala", sala);
         return q.getResultList();
     }
 

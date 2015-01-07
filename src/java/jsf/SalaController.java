@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
 
 @ManagedBean(name = "salaController")
 @SessionScoped
@@ -116,6 +117,8 @@ public class SalaController implements Serializable {
     public List<Sala> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+    
+   
 
     @FacesConverter(forClass = Sala.class)
     public static class SalaControllerConverter implements Converter {

@@ -6,10 +6,15 @@
 package jsf;
 
 import entity.Pracownik;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import jsf.util.JsfUtil;
 import session.PracownikFacade;
@@ -82,10 +87,16 @@ public class LoginController implements Serializable {
         }
     }
 
-    public String logout() {
+    public void logout() {
         HttpSession session = Util.getSession();
         session.invalidate();
-        return "login";
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            ec.redirect(ec.getRequestContextPath() + "/faces/login.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        return "login?faces-redirect=true";
     }
 
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+
+        <ui:define name="body">
+
+            <h:form>
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+                    <p:outputLabel for="sale" value="Sale:"  />
+                    <p:selectOneMenu id="sale" value="#{salaElementController.selectedRoom}"  panelStyle="width:180px"
+                                     effect="fade" var="s" style="width:160px" filter="true" filterMatchMode="startsWith">
+                        <f:selectItems value="#{salaController.items}" var="selectedRoom" itemLabel="#{selectedRoom.sala}" itemValue="#{selectedRoom}" />
+
+
+
+                        <p:column>
+                            <h:outputText value="#{s.sala}" />
+                        </p:column>
+                        <f:ajax render="ElementListForm2" execute="@this" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <!--<p:growl id="growl" life="2000" />-->
+
+            </h:form>
+
+            <h:form id="ElementListForm2">
+                <p:panel >
+                    <p:dataTable id="datalist" value="#{salaElementController.elementy}" var="item"
+                                 selectionMode="single" selection="#{salaElementController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idElementu}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        <p:ajax event="rowSelect"   update="editButton"/>
+                        <p:ajax event="rowUnselect" update="editButton" />
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_idElementu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idElementu}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nazwa}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_nazwa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nazwa}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nrEwidencyjny}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_nrEwidencyjny}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nrEwidencyjny}"/>
+                        </p:column>
+
+
+
+
+                        <p:column filterBy="#{item.osobaOdpowiedzialna}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_osobaOdpowiedzialna}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.osobaOdpowiedzialna.imie} #{item.osobaOdpowiedzialna.nazwisko}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.stan}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementTitle_stan}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.stan.stan}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ElementEditForm" oncomplete="PF('ElementEditDialog').show()" disabled="#{!loginController.isAdmin}"/>
+                        </f:facet>
+
+                    </p:dataTable>
+
+
+                </p:panel>
+
+            </h:form>
+            <ui:include src="/admin/audyt/Edit.xhtml"/>
+            <!--<ui:include src="/element/List.xhtml"/>-->
+        </ui:define>
+    </ui:composition>
+</html>

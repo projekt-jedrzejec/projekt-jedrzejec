@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                <p:menuitem outcome="/panel" value="Panel użytkownika" style="position:absolute; right:60px;"/>
+                <p:menuitem value="Wyloguj" action="#{loginController.logout}" style="position:absolute; right:4px;"/>
+
+            </p:menubar> 
+        <br/>
+        <br/>
+            <p:outputPanel style="text-align: center">       
+                <p:button styleClass="zarz1" outcome="/admin/kategoria/List" value="Zarządzaj kategoriami"/>
+
+                <p:button styleClass="zarz1" outcome="/admin/pokoj/List" value="Zarządzaj pokojami"/>
+
+                <p:button styleClass="zarz1" outcome="/admin/sala/List" value="Zarządzaj salami"/>
+
+                <p:button styleClass="zarz1" outcome="/admin/stan/List" value="Zarządaj stanami"/>
+
+                <p:button styleClass="zarz1" outcome="/admin/stanowisko/List" value="Zarządzaj stanowiskami"/>
+
+                <p:button styleClass="zarz1" outcome="/admin/typ/List" value="Zarządzaj typami"/>
+
+                
+                <style >
+                    .ui-button.zarz1 {
+                        width: 180px;
+                        height: 180px;
+                        margin-left: 1em;
+                        display:inline-block;
+                        font-size: 25px !important;
+                        font-family:calibri;
+
+                    }
+                </style>
+            </p:outputPanel> 
+        </h:form>
+        <h:form>      
+
+
+        </h:form>
+
+    </h:body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+

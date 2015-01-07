@@ -16,6 +16,7 @@
 
         <ui:define name="body">
             <h:form id="ElementListForm">
+                
                 <p:panel >
                     <p:dataTable id="datalist" value="#{elementController.items}" var="item"
                                  selectionMode="single" selection="#{elementController.selected}"
@@ -28,12 +29,12 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <!--<p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListElementTitle_idElementu}"/>
                             </f:facet>
                             <h:outputText value="#{item.idElementu}"/>
-                        </p:column>
+                        </p:column>-->
                         <p:column filterBy="#{item.nazwa}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListElementTitle_nazwa}"/>
@@ -107,18 +108,18 @@
 
                         </f:facet>
                     </p:dataTable>
-
+                   
                     <h:commandLink>
                         <p:graphicImage name="images/xls.png" />
-                        <p:dataExporter type="xls" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                        <p:dataExporter type="xls" target="datalist" fileName="Lista" encoding="ISO-8859-2"/>
                     </h:commandLink>
                     <h:commandLink id="pdf">
                         <p:graphicImage name="images/pdf.png" />
-                        <p:dataExporter type="pdf" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                        <p:dataExporter type="pdf" target="datalist" fileName="Lista" encoding="ISO-8859-2"/>
                     </h:commandLink>
                     <h:commandLink>
                         <p:graphicImage name="images/csv.png" />
-                        <p:dataExporter type="csv" target="datalist" fileName="Etap" encoding="ISO-8859-2"/>
+                        <p:dataExporter type="csv" target="datalist" fileName="Lista" encoding="ISO-8859-2"/>
                     </h:commandLink>
                     <h:commandLink>
                         <p:graphicImage name="images/xml.png" />
@@ -133,6 +134,7 @@
             <ui:include src="/admin/element/Edit.xhtml"/>
 
             <ui:include src="View.xhtml"/>
+            <!--<ui:include src="/admin/audyt/Audyt.xhtml"/>-->
         </ui:define>
     </ui:composition>
 

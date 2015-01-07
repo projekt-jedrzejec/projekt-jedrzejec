@@ -27,7 +27,7 @@
                         <p:outputLabel value="#{bundle.EditPracownikLabel_login}" for="login" />
                         <p:inputText id="login" value="#{pracownikController.selected.login}" title="#{bundle.EditPracownikTitle_login}" required="true" requiredMessage="#{bundle.EditPracownikRequiredMessage_login}"/>
                         <p:outputLabel value="#{bundle.EditPracownikLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{pracownikController.haslo}" title="#{bundle.EditPracownikTitle_password}" required="false" />
+                        <h:inputSecret redisplay="true" id="password" value="#{pracownikController.haslo}" title="#{bundle.EditPracownikTitle_password}" required="false" />
                         <p:outputLabel value="#{bundle.EditPracownikLabel_pokoj}" for="pokoj" />
                         <p:selectOneMenu id="pokoj" value="#{pracownikController.selected.pokoj}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
